@@ -47,20 +47,17 @@ public class ControladorVideojocs {
         return new ResponseEntity<Videojoc>(videojoc, HttpStatus.CREATED);
     }
 
-
-
-    /*
-
-
-
     @DeleteMapping("/videojocs/{id}")
-    public Videojoc eliminarUsuari(@PathVariable int id){
-        return serveiVideojocs.eliminarVideojoc(id);
+    public ResponseEntity<?> eliminarUsuari(@PathVariable int id){
+        Videojoc videojoc = serveiVideojocs.eliminarVideojoc(id);
+        if(videojoc == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(videojoc);
     }
 
     @PutMapping("/videojocs")
-    public Videojoc modificarUsuari(@RequestBody Videojoc videojoc){
-        return serveiVideojocs.modificarVideojoc(videojoc);
+    public ResponseEntity<?> modificarUsuari(@RequestBody Videojoc nou){
+        Videojoc videojoc = serveiVideojocs.modificarVideojoc(nou);
+        if(videojoc == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(videojoc);
     }
-    */
 }
