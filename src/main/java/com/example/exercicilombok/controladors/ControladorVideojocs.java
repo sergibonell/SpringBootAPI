@@ -26,6 +26,14 @@ public class ControladorVideojocs {
         else return ResponseEntity.ok(videojocs);
     }
 
+    @GetMapping("/videojocs/{id}")
+    public ResponseEntity<?> consultarVideojoc(@PathVariable int id)
+    {
+        Videojoc videojoc = serveiVideojocs.consultarVideojoc(id);
+        if(videojoc == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(videojoc);
+    }
+
     @PostMapping("/videojocs")
     public ResponseEntity<?> crearUsuari(@RequestBody Videojoc nou){
         Videojoc videojoc = serveiVideojocs.afegirVideojoc(nou);
@@ -33,11 +41,6 @@ public class ControladorVideojocs {
     }
 
     /*
-    @GetMapping("/videojocs/{id}")
-    public Videojoc consultarVideojoc(@PathVariable int id)
-    {
-        return serveiVideojocs.consultarVideojoc(id);
-    }
 
     @GetMapping("/videojocs/genere/{genere}")
     public List<Videojoc> llistarUsuarisPerGenere(@PathVariable String genere){
@@ -48,8 +51,6 @@ public class ControladorVideojocs {
     public long comptarPerGenere(@PathVariable String genere){
         return serveiVideojocs.comptarPerGenere(genere);
     }
-
-
 
     @DeleteMapping("/videojocs/{id}")
     public Videojoc eliminarUsuari(@PathVariable int id){
