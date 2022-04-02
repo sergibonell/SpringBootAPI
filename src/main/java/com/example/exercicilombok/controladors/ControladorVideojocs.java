@@ -17,6 +17,7 @@ public class ControladorVideojocs {
     @GetMapping("/videojocs")
     public ResponseEntity<?> llistarVideojocs(@RequestParam (value="genere", required=false) String genere){
         List<Videojoc> videojocs;
+
         if(genere==null)
             videojocs = serveiVideojocs.llistarVideojocs();
         else
@@ -34,23 +35,23 @@ public class ControladorVideojocs {
         else return ResponseEntity.ok(videojoc);
     }
 
+    @GetMapping("/videojocs/comptar/{genere}")
+    public ResponseEntity<?> comptarPerGenere(@PathVariable String genere){
+        long count = serveiVideojocs.comptarPerGenere(genere);
+        return ResponseEntity.ok(count);
+    }
+
     @PostMapping("/videojocs")
     public ResponseEntity<?> crearUsuari(@RequestBody Videojoc nou){
         Videojoc videojoc = serveiVideojocs.afegirVideojoc(nou);
         return new ResponseEntity<Videojoc>(videojoc, HttpStatus.CREATED);
     }
 
+
+
     /*
 
-    @GetMapping("/videojocs/genere/{genere}")
-    public List<Videojoc> llistarUsuarisPerGenere(@PathVariable String genere){
-        return serveiVideojocs.llistarVideojocsPerGenere(genere);
-    }
 
-    @GetMapping("/videojocs/comptar/{genere}")
-    public long comptarPerGenere(@PathVariable String genere){
-        return serveiVideojocs.comptarPerGenere(genere);
-    }
 
     @DeleteMapping("/videojocs/{id}")
     public Videojoc eliminarUsuari(@PathVariable int id){
