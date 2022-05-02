@@ -51,7 +51,7 @@ public class ControladorVideojocs {
     public ResponseEntity<?> eliminarUsuari(@PathVariable int id){
         Videojoc videojoc = serveiVideojocs.eliminarVideojoc(id);
         if(videojoc == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(videojoc);
+        else return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/videojocs")
